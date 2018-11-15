@@ -1,0 +1,94 @@
+
+
+@media screen and (max-width: 720px) {
+
+  body {
+   background-color: #FF5F00; /* HTW-orange */
+   font-size:1rem;
+   font-family: Verdana, Arial, sans-serif;
+  }
+
+  .flex-container {
+    display:flex;
+    margin: 2em 0px;
+    flex-direction: column;
+  }
+
+ .flex-container > div, section, aside {
+    padding: 1em 2em;
+ }
+
+  #oben {
+    background-color: #4d4dff;
+    padding: 1em 2em;
+    color: white;
+  }
+
+  #links {
+   background-color: #ccccff;
+   color: white;
+  }
+
+  #mitte {
+    background-color: #0000ff;
+    color: white;
+  }
+
+  #rechts {
+    background-color: #000066;
+    color: white;
+  }
+
+  #unten {
+    background-color: #e6e6ff;
+    padding: 1em 2em;
+  }
+
+}
+
+
+@media screen and (min-width: 720px) {
+ body {
+ background-color: #0082D1; /* HTW-blau */
+ font-size:1.2rem;
+ }
+
+ .flex-container {
+   display:flex;
+   margin: 2em 0px;
+   flex-direction: row;
+ }
+
+.flex-container > div, section, aside {
+   padding: 1em 2em;
+}
+
+ #oben {
+   background-color: #e9fce9;
+   padding: 1em 2em;
+ }
+
+ #links {
+  background-color: lightgreen;
+  color: white;
+  flex: 1;
+ }
+
+ #mitte {
+   background-color: #0e580e;
+   color: white;
+   flex: 4;
+ }
+
+ #rechts {
+   background-color: #38e038;
+   color: white;
+   flex: 2;
+ }
+
+ #unten {
+   background-color: #bdf5bd;
+   padding: 1em 2em;
+ }
+
+}
