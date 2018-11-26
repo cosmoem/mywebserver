@@ -93,7 +93,7 @@
   <body>
     <h1>Zufallszahlen</h1>
     <div>
-      <?php zufzahl(20000, 20, 5); ?>
+      <?php zufzahl(20000, 20, 4); ?>
     </div>
   </body>
 </html>
