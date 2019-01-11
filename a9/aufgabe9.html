@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Aufgabe 9</title>
+  <meta name="author" content="Anna-Frieda Gruse">
+  <meta name="viewport" content="wnameth=device-wnameth, initial-scale=1">
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+-->
+  <style type="text/css">
+
+    body {
+      width: 98%;
+      height: 98%;
+      margin: auto;
+      font-family: Verdana, Arial;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    #area {
+      background: red;
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    #text {
+      width: 400px;
+      height: 30px;
+      margin-top: 50px;
+    }
+    #wrapper {
+      width: 400px;
+      margin: auto;
+    }
+
+
+  </style>
+
+</head>
+<body>
+  <h1>Mausereignisse behandeln mit JavaScript</h1>
+  <div id="area"
+    onclick="changeColor('green', 'area')"
+    ondblclick="addText('Doppelklick', 'area', 'white')"
+    onmouseenter="specificSizeChange(true)"
+    onmouseleave="specificSizeChange(false)">
+  </div>
+
+  <h1>Tastaturereignisse behandeln mit JavaScript</h1>
+  <div id="wrapper">
+    <input type="text" id="text"
+    onfocus="changeColor('lightblue', 'text')"
+    onblur="changeColor('white', 'text')"
+    onkeyup="displayInput()"
+    >
+     <div id="div2" style="padding-top:20px; font-weight:bold;"></div>
+  </div>
+
+  <script>
+
+    function displayInput() {
+      var value = document.getElementById("text").value;
+      var add = value[value.length -1]; /* findet neusten input heraus */
+      addText(add, 'wrapper', 'black'); /* fügt neusten input zu textfeld hinzu */
+      document.getElementById("text").value = value; /* gesamter input bleibt in inputfeld*/
+      checkInput(value, "text");
+      document.getElementById("text").focus(); /* weiteres eintippen direkt möglich */
+    }
+
+    function checkInput(input, elementid) {
+      if(isNaN(input)) {
+        document.getElementById(elementid).style.color = "red";
+      }
+      else {
+        document.getElementById(elementid).style.color = "green";
+      }
+    }
+
+    function changeColor(color, elementid) {
+      document.getElementById(elementid).style.background=color;
+    }
+
+    function addText(text, elementid, color) {
+      var area = document.getElementById(elementid);
+      if(elementid=='area') { /* verhindert mehrfacherscheinen von text */
+        area.innerHTML = text;
+      }
+      else { /* verhindert das verschwinden des inputfelds */
+        area.innerHTML = area.innerHTML + text;
+      }
+      area.style.textAlign = "center";
+      area.style.lineHeight = document.getElementById(elementid).style.height;
+      area.style.color = color;
+      area.style.fontSize = "150%";
+      area.style.fontWeight = "bold";
+    }
+
+    function changeSize(height, width) {
+      document.getElementById("area").style.height = height;
+      document.getElementById("area").style.width = width;
+      area.style.lineHeight = document.getElementById("area").style.height;
+    }
+
+    function specificSizeChange(boolean) {
+      if(boolean) {
+        changeSize("300px", "300px");
+      }
+      else {
+        changeSize("200px", "200px");
+      }
+    }
+
+  </script>
+
+
+</body>
+</html>
