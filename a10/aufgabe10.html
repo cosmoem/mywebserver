@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body onload='createTable(); document.getElementById("filter").focus();'>
+<div class="container-fluid">
+	<h1>Formular</h1>
+
+	<form class="form-horizontal" role="form">
+ 		<div class="form-group">
+    			<label class="control-label col-sm-2">Filter:</label>
+    			<div class="col-sm-10">
+        			<input class="form-control" id="filter" type="text" placeholder="Stadt oder Gruendungsjahr" >
+      		</div>
+  		</div>
+	</form>
+
+	<div id="tabelle" >
+	</div>
+
+	<div id="unten">
+	</div>
+</div>
+<script>
+
+// on key up if input ==
+// count zeichen
+
+
+function createTable()
+{
+
+	var staedte = [
+	{ "jahr" : 1237, "stadt" : "Berlin", "link" : "http://de.wikipedia.org/wiki/Berlin", "bild" : "/mywebserver/images/berlin.png"},
+	{ "jahr" : 1624, "stadt" : "New York", "link" : "http://de.wikipedia.org/wiki/New_York_City", "bild" : "/mywebserver/images/newyork.png"},
+	{ "jahr" : 1252, "stadt" : "Stockholm", "link" : "http://de.wikipedia.org/wiki/Stockholm", "bild" : "/mywebserver/images/stockholm.png"},
+	{ "jahr" : 852, "stadt" : "Madrid", "link" : "http://de.wikipedia.org/wiki/Madrid", "bild" : "/mywebserver/images/madrid.png"},
+	{ "jahr" : 1827, "stadt" : "Bremerhaven", "link" : "http://de.wikipedia.org/wiki/Bremerhaven", "bild" : "/mywebserver/images/bremerhaven.png"},
+	{ "jahr" : 150, "stadt" : "Bremen", "link" : "http://de.wikipedia.org/wiki/Bremen", "bild" : "/mywebserver/images/bremen.png"},
+	{ "jahr" : 1202, "stadt" : "Bernau", "link" : "http://de.wikipedia.org/wiki/Bernau_bei_Berlin", "bild" : "/mywebserver/images/bernau.png"},
+	{ "jahr" : 929, "stadt" : "Brandenburg", "link" : "http://de.wikipedia.org/wiki/Brandenburg_an_der_Havel", "bild" : "/mywebserver/images/brandenburg.png"},
+	{ "jahr" : 805, "stadt" : "Magdeburg", "link" : "http://de.wikipedia.org/wiki/Magdeburg", "bild" : "/mywebserver/images/magdeburg.png"},
+	{ "jahr" : 1222, "stadt" : "Marburg", "link" : "http://de.wikipedia.org/wiki/Marburg", "bild" : "/mywebserver/images/marburg.png"},
+	{ "jahr" : 766, "stadt" : "Mannheim", "link" : "http://de.wikipedia.org/wiki/Mannheim", "bild" : "/mywebserver/images/mannheim.png"},
+	{ "jahr" : 782, "stadt" : "Mainz", "link" : "http://de.wikipedia.org/wiki/Mainz", "bild" : "/mywebserver/images/mainz.png"}
+	];
+
+	var linkesDiv = document.getElementById('tabelle');
+	linkesDiv.innerHTML = "";
+	var table = document.createElement('TABLE');
+	table.setAttribute('class', 'table table-striped');		// Bootstrap
+	var thead = document.createElement('THEAD');
+	var tr = document.createElement('TR');
+	var th = document.createElement('TH');
+	var tbody = document.createElement('TBODY');
+	var td = document.createElement('TD');
+
+	var _tr = tr.cloneNode(false);							// Variable für Clone von tr
+	var _td = td.cloneNode(false);							// Variable für Clone von td
+
+  tHead();
+
+  for(var j=0; j<staedte.length;j++) {
+    fillTable(j);
+  }
+
+  table.appendChild(tbody);
+  linkesDiv.appendChild(table);
+
+  table.appendChild(tbody);
+  linkesDiv.appendChild(table);
+
+	var textfield = document.getElementById('filter');
+  // bei keyup alle einträge entfernen und durch gefilterte ersetzen
+  textfield.addEventListener('keyup', function(e){clearTable(); filter();}, false);
+
+  table.appendChild(tbody);
+  linkesDiv.appendChild(table);
+
+
+/* ---------------------------------- FUNKTIONEN ---------------------------------- */
+
+	// Funktion erstellt Spaltenüberschriften
+
+  function tHead() {
+	var _th = th.cloneNode(false);
+	var _text = document.createTextNode('Nr');
+	_th.appendChild(_text);
+	tr.appendChild(_th);
+
+	_th = th.cloneNode(false);
+	_text = document.createTextNode('Jahr');
+	_th.appendChild(_text);
+	tr.appendChild(_th);
+
+	_th = th.cloneNode(false);
+	_text = document.createTextNode('Stadt');
+	_th.appendChild(_text);
+	tr.appendChild(_th);
+
+	_th = th.cloneNode(false);
+	_text = document.createTextNode('Link');
+	_th.appendChild(_text);
+	tr.appendChild(_th);
+
+	_th = th.cloneNode(false);
+	_text = document.createTextNode('Bild');
+	_th.appendChild(_text);
+	tr.appendChild(_th);
+
+	thead.appendChild(tr);			// Spaltenueberschriften an thead haengen
+
+    table.appendChild(thead);		// thead an die Tabelle haengen
+  }
+
+  // Funktion füllt Tabelle mit Einträgen, c (counter) muss übergeben werden
+  // da die funktion in verschiedenen for-schleifen mit verscheidnene variablen
+  //ausgeführt wird und es sonst zum konflikt kommt
+
+  function fillTable(c) {
+
+    _td = _td.cloneNode(false);
+    _tr = _tr.cloneNode(false);
+    _text = document.createTextNode(c+1);
+    _td = _td.cloneNode(false);
+    _td.appendChild(_text);
+    _tr.appendChild(_td);
+
+    _text = document.createTextNode(staedte[c].jahr);
+    _td = _td.cloneNode(false);
+    _td.appendChild(_text);
+    _tr.appendChild(_td);
+
+    _text = document.createTextNode(staedte[c].stadt);
+    _td = _td.cloneNode(false);
+    _td.appendChild(_text);
+    _tr.appendChild(_td);
+
+    var link = document.createElement('a');
+    _text = document.createTextNode("Info");
+    link.appendChild(_text);
+    link.setAttribute('href', staedte[c].link);
+    link.setAttribute('target', '_blank')
+    link.style.background = "lightgreen";
+    link.style.color = "white";
+    link.style.padding = "3px 10px";
+    link.style.border = "1px solid lightgreen"
+    link.style.borderRadius = "3px";
+    _td = _td.cloneNode(false);
+    _td.appendChild(link);
+    _tr.appendChild(_td);
+
+    var bild = document.createElement('img');
+    bild.setAttribute('src', staedte[c].bild);
+    bild.style.width = "60px";
+    bild.addEventListener('click', function(e){cloneImage(e);}, false);
+    _td = _td.cloneNode(false);
+    _td.appendChild(bild);
+    _tr.appendChild(_td);
+
+    tbody.appendChild(_tr);
+  }
+
+  // Funktion zum Eiträge löschen bevor Filter angewendet wird
+  function clearTable() {
+    //firstChild 1 ist Tabelle, davon firstChild thead soll
+    //nicht gelöscht werden, nur inhalt von second/last child tbody
+    var a = linkesDiv.firstChild.lastChild;
+    //solange kinder existieren, diese löschen
+    while(a.firstChild){
+      a.removeChild(a.firstChild);
+    }
+  }
+
+  // Funktion zum Einträge machen nach Filterung in Tabelle einfügen
+  function filter() {
+    var add;
+    var input = document.getElementById('filter').value;		// eingegbene Daten (Formular)
+    var substring;
+    for(var i=0; i<staedte.length;i++) {
+      add = false;
+      //falls Zahl --> Filterung nach Jahr
+      if(!isNaN(input)){
+        substring = staedte[i].jahr.toString().substring(0, input.length);
+      }
+      //falls keine Zahl --> Filterung nach Name
+      else {
+        substring = staedte[i].stadt.toString().substring(0, input.length);
+      }
+      //toUpperCase() um nicht case-sensitive zu vergleichen
+      if(input.toUpperCase()==substring.toUpperCase()) {
+        add = true;
+      }
+
+      if(add){
+        fillTable(i);
+      }
+    }
+  }
+}
+
+// hier noch eine Funktion, die das Bild, auf das geklickt wurde, in
+// das Div "unten" clont
+
+var untenDiv = document.getElementById('unten');
+untenDiv.innerHTML = "";
+
+function cloneImage(e) {
+  var b = document.createElement('img');
+  b = e.target.cloneNode(true);
+  b.style.marginRight = "15px";
+  b.style.marginBottom = "15px";
+  untenDiv.appendChild(b);
+
+}
+
+
+
+</script>
+</body>
+</html>
